@@ -8,11 +8,12 @@ import AreaController from "./controller/AreaController";
 import ProcessController from "./controller/ProcessController";
 import SubprocessController from "./controller/SubprocessController";
 import ToolController from "./controller/ToolController";
+import PeopleController from "./controller/PeopleController";
 
 const app: any = createExpressServer({
     cors: true,
     routePrefix: "/api",
-    controllers: [AuthController, AreaController, ProcessController, SubprocessController, ToolController],
+    controllers: [AuthController, AreaController, ProcessController, SubprocessController, ToolController, PeopleController],
     classTransformer: true
 });
 

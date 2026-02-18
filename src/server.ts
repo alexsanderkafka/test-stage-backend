@@ -4,11 +4,12 @@ import { createExpressServer } from "routing-controllers";
 import express from "express";
 import { MySQLDataSource } from "./dataBase";
 import AuthController from "./controller/AuthController";
+import AreaController from "./controller/AreaController";
 
 const app: any = createExpressServer({
     cors: true,
     routePrefix: "/api",
-    controllers: [AuthController],
+    controllers: [AuthController, AreaController],
     classTransformer: true
 });
 

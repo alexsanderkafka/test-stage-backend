@@ -27,4 +27,12 @@ export default class UserRepository {
 
     }
 
+    async findUserByExternalId(externalId: string): Promise<UserEntity> {
+
+        return await this.ormRepository.findOne({
+            where: {externalId: externalId}
+        });
+
+    }
+
 }

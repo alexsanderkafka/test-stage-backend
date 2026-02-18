@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, OneToMany } from "typeorm";
+import AreaEntity from "./AreaEntity";
 
 @Entity("User")
 export default class User {
@@ -27,6 +28,9 @@ export default class User {
         nullable: false,
     })
     password: string;
+
+    @OneToMany(() => AreaEntity, area => area.user)
+    areas!: AreaEntity[];
 
     constructor(email: string, password: string) {
         this.email = email;

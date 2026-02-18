@@ -9,7 +9,10 @@ CREATE TABLE Area (
     id INT AUTO_INCREMENT PRIMARY KEY,
     externalId VARCHAR(36) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
-    description TEXT NOT NULL
+    description TEXT NOT NULL,
+    userId INT NOT NULL,
+
+    FOREIGN KEY (userId) REFERENCES User(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Process (

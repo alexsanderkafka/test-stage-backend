@@ -1,5 +1,6 @@
 import { randomUUID } from "crypto";
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, ManyToOne, JoinColumn } from "typeorm";
+import User from "./UserEntity";
 
 @Entity("Area")
 export default class AreaEntity {
@@ -27,11 +28,16 @@ export default class AreaEntity {
     })
     description: string;
 
-    constructor(id: number, externalId: string, name: string, description: string) {
+    @ManyToOne(() => User, ( user ) => user.id , { onDelete: "CASCADE" })
+    @JoinColumn({ name: "userId" })
+    user: User;
+
+    constructor(id: number, externalId: string, name: string, description: string, user: User) {
         this.id = id;
         this.externalId = externalId;
         this.name = name;
         this.description = description;
+        this.user = user;
     }
 
     @BeforeInsert()

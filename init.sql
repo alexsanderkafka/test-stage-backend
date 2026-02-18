@@ -22,8 +22,6 @@ CREATE TABLE Process (
     name VARCHAR(100) NOT NULL,
     type VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
-    positionX DECIMAL(10,2),
-    positionY DECIMAL(10,2),
 
     FOREIGN KEY (areaId) REFERENCES Area(id) ON DELETE CASCADE
 );

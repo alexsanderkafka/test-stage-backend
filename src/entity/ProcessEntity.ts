@@ -40,22 +40,6 @@ export default class ProcessEntity {
     })
     description: string;
 
-    @Column({
-        type: "decimal",
-        precision: 10,
-        scale: 2,
-        nullable: true,
-    })
-    positionX: number;
-
-    @Column({
-        type: "decimal",
-        precision: 10,
-        scale: 2,
-        nullable: true,
-    })
-    positionY: number;
-
     constructor(id: number, externalId: string, area: Area, name: string, type: string, description: string, positionX: number, positionY: number) {
         this.id = id;
         this.externalId = externalId;
@@ -63,8 +47,6 @@ export default class ProcessEntity {
         this.name = name;
         this.type = type;
         this.description = description;
-        this.positionX = positionX;
-        this.positionY = positionY;
     }
 
     @BeforeInsert()

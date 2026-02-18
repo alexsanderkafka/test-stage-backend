@@ -5,11 +5,12 @@ import express from "express";
 import { MySQLDataSource } from "./dataBase";
 import AuthController from "./controller/AuthController";
 import AreaController from "./controller/AreaController";
+import ProcessController from "./controller/ProcessController";
 
 const app: any = createExpressServer({
     cors: true,
     routePrefix: "/api",
-    controllers: [AuthController, AreaController],
+    controllers: [AuthController, AreaController, ProcessController],
     classTransformer: true
 });
 

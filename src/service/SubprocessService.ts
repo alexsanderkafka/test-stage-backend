@@ -3,6 +3,7 @@ import ProcessRepository from "../repository/ProcessRepository";
 import SubprocessRepository from "../repository/SubprocessRepository";
 import AppError from "../error/AppError";
 import SubprocessEntity from "../entity/SubprocessEntity";
+import ProcessEntity from "../entity/ProcessEntity";
 
 export default class SubprocessService{
     
@@ -12,7 +13,7 @@ export default class SubprocessService{
 
     async saveNewSubprocess(dto: SubprocessRequestDTO, processExternalId: string): Promise<void>{
 
-        const process = await this.processRepository.findProcessByExternalId(processExternalId);
+        const process: ProcessEntity = await this.processRepository.findProcessByExternalId(processExternalId);
 
         if(!process){
             throw new AppError("Processo não encontrado", 404);

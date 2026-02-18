@@ -3,6 +3,9 @@ import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, BeforeIn
 import Area from "./AreaEntity";
 import { randomUUID } from "crypto";
 import SubprocessEntity from "./SubprocessEntity";
+import PeopleEntity from "./PeopleEntity";
+import ToolsEntity from "./ToolsEntity";
+import DocumentationEntity from "./DocumentationEntity";
 
 @Entity("Process")
 export default class ProcessEntity {
@@ -43,6 +46,15 @@ export default class ProcessEntity {
 
     @OneToMany(() => SubprocessEntity, subprocess => subprocess.process)
     subprocess!: SubprocessEntity[];
+
+    @OneToMany(() => PeopleEntity, people => people.process)
+    peoples!: PeopleEntity[];
+
+    @OneToMany(() => ToolsEntity, tool => tool.process)
+    tools!: ToolsEntity[];
+
+    @OneToMany(() => DocumentationEntity, documentation => documentation.process)
+    documentations!: DocumentationEntity[];
 
     constructor(id: number, externalId: string, area: Area, name: string, type: string, description: string, positionX: number, positionY: number) {
         this.id = id;

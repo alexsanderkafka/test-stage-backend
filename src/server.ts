@@ -3,7 +3,7 @@ import "dotenv/config";
 import { createExpressServer } from "routing-controllers";
 import express from "express";
 import TestController from "./controller/TestController";
-import { MySQLDataSource } from "./dataBasa";
+import { MySQLDataSource } from "./dataBase";
 
 const app: any = createExpressServer({
     cors: true,

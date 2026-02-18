@@ -1,5 +1,12 @@
 import { DataSource } from "typeorm";
 import "dotenv/config";
+import UserEntity from "./entity/UserEntity";
+import AreaEntity from "./entity/AreaEntity";
+import ProcessEntity from "./entity/ProcessEntity";
+import SubprocessEntity from "./entity/SubprocessEntity";
+import ToolsEntity from "./entity/ToolsEntity";
+import PeopleEntity from "./entity/PeopleEntity";
+import DocumentationEntity from "./entity/DocumentationEntity";
 
 export const MySQLDataSource = new DataSource({
     type: "mysql",
@@ -8,6 +15,6 @@ export const MySQLDataSource = new DataSource({
     username: process.env.DB_USERNAME || "username",
     password: process.env.DB_PASSWORD || "password",
     database: process.env.DB_NAME || "db_name",
-    //entities: [],
+    entities: [UserEntity, AreaEntity, ProcessEntity, SubprocessEntity, ToolsEntity, PeopleEntity, DocumentationEntity],
     logging: true
 });

@@ -1,0 +1,63 @@
+CREATE TABLE User (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    externalId VARCHAR(36) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password TEXT NOT NULL
+);
+
+CREATE TABLE Area (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    externalId VARCHAR(36) NOT NULL UNIQUE,
+    name VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL
+);
+
+CREATE TABLE Process (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    externalId VARCHAR(36) NOT NULL UNIQUE,
+    areaId INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    type VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    positionX DECIMAL(10,2),
+    positionY DECIMAL(10,2),
+
+    FOREIGN KEY (areaId) REFERENCES Area(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Subprocess (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    externalId VARCHAR(36) NOT NULL UNIQUE,
+    processId INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    description TEXT,
+
+    FOREIGN KEY (processId) REFERENCES Process(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Tools (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    externalId VARCHAR(36) NOT NULL UNIQUE,
+    processId INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+
+    FOREIGN KEY (processId) REFERENCES Process(id) ON DELETE CASCADE
+);
+
+CREATE TABLE People (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    externalId VARCHAR(36) NOT NULL UNIQUE,
+    processId INT NOT NULL,
+    name VARCHAR(100) NOT NULL,
+
+    FOREIGN KEY (processId) REFERENCES Process(id) ON DELETE CASCADE
+);
+
+CREATE TABLE Documentation (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    externalId VARCHAR(36) NOT NULL UNIQUE,
+    processId INT NOT NULL,
+    url TEXT NOT NULL,  
+
+    FOREIGN KEY (processId) REFERENCES Process(id) ON DELETE CASCADE
+);

@@ -5,14 +5,14 @@ import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert } from "typeorm";
 export default class User {
 
     @PrimaryGeneratedColumn()
-    id: number;
+    id!: number;
 
     @Column({
         type: "uuid",
         unique: true,
         nullable: false,
     })
-    externalId: string;
+    externalId!: string;
 
     @Column({
         type: "varchar",
@@ -28,9 +28,7 @@ export default class User {
     })
     password: string;
 
-    constructor(id: number, externalId: string, email: string, password: string) {
-        this.id = id;
-        this.externalId = externalId;
+    constructor(email: string, password: string) {
         this.email = email;
         this.password = password;
     }

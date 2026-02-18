@@ -2,13 +2,13 @@ import "reflect-metadata";
 import "dotenv/config";
 import { createExpressServer } from "routing-controllers";
 import express from "express";
-import TestController from "./controller/TestController";
 import { MySQLDataSource } from "./dataBase";
+import AuthController from "./controller/AuthController";
 
 const app: any = createExpressServer({
     cors: true,
     routePrefix: "/api",
-    controllers: [TestController],
+    controllers: [AuthController],
     classTransformer: true
 });
 

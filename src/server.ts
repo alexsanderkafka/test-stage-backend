@@ -6,11 +6,12 @@ import { MySQLDataSource } from "./dataBase";
 import AuthController from "./controller/AuthController";
 import AreaController from "./controller/AreaController";
 import ProcessController from "./controller/ProcessController";
+import SubprocessController from "./controller/SubprocessController";
 
 const app: any = createExpressServer({
     cors: true,
     routePrefix: "/api",
-    controllers: [AuthController, AreaController, ProcessController],
+    controllers: [AuthController, AreaController, ProcessController, SubprocessController],
     classTransformer: true
 });
 

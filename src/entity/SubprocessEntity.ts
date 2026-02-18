@@ -27,17 +27,11 @@ export default class SubprocessEntity {
     })
     name: string;
 
-    @Column({
-        type: "text",
-    })
-    description: string;
-
-    constructor(id: number, externalId: string, process: Process, name: string, description: string) {
+    constructor(id: number, externalId: string, process: Process, name: string) {
         this.id = id;
         this.externalId = externalId;
         this.process = process;
         this.name = name;
-        this.description = description;
     }
 
     @BeforeInsert()

@@ -1,7 +1,8 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, BeforeInsert } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn, BeforeInsert, OneToMany } from "typeorm";
 
 import Area from "./AreaEntity";
 import { randomUUID } from "crypto";
+import SubprocessEntity from "./SubprocessEntity";
 
 @Entity("Process")
 export default class ProcessEntity {
@@ -39,6 +40,9 @@ export default class ProcessEntity {
         nullable: false,
     })
     description: string;
+
+    @OneToMany(() => SubprocessEntity, subprocess => subprocess.process)
+    subprocess!: SubprocessEntity[];
 
     constructor(id: number, externalId: string, area: Area, name: string, type: string, description: string, positionX: number, positionY: number) {
         this.id = id;

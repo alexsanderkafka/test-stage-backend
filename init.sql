@@ -31,7 +31,6 @@ CREATE TABLE Subprocess (
     externalId VARCHAR(36) NOT NULL UNIQUE,
     processId INT NOT NULL,
     name VARCHAR(100) NOT NULL,
-    description TEXT,
 
     FOREIGN KEY (processId) REFERENCES Process(id) ON DELETE CASCADE
 );

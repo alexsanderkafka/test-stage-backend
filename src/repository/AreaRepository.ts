@@ -29,7 +29,8 @@ export default class AreaRepository{
                     subprocess: true,
                     peoples: true,
                     tools: true,
-                    documentations: true
+                    documentations: true,
+                    area: true
                 },
                 user: true,
             }

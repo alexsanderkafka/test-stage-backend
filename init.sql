@@ -57,7 +57,7 @@ CREATE TABLE Documentation (
     id INT AUTO_INCREMENT PRIMARY KEY,
     externalId VARCHAR(36) NOT NULL UNIQUE,
     processId INT NOT NULL,
-    url TEXT NOT NULL,  
+    name VARCHAR(100) NOT NULL,
 
     FOREIGN KEY (processId) REFERENCES Process(id) ON DELETE CASCADE
 );

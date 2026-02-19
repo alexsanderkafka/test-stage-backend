@@ -1,4 +1,4 @@
-import { Body, Delete, JsonController, Param, Post, Put, Res, UseBefore } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Put, Res, UseBefore } from "routing-controllers";
 import ProcessRequestDTO from "../dto/request/ProcessRequestDTO";
 import ProcessService from "../service/ProcessService";
 import ProcessResponseDTO from "../dto/response/ProcessResponseDTO";
@@ -34,5 +34,12 @@ export default class ProcessController {
         await this.processService.deleteProcess(externalId);
 
         return res.status(204).send();
+    }
+
+    @Get("/:userExternalId")
+    async getAll(@Param("userExternalId") userExternalId: string, @Res() res: any){
+        const result: ProcessResponseDTO[] = await this.processService.getAll(userExternalId);
+                        
+        return res.status(200).json(result);
     }
 }

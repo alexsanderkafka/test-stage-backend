@@ -23,13 +23,13 @@ export default class DocumentationEntity {
         type: "text",
         nullable: false,
     })
-    url: string;
+    name: string;
         
-    constructor(id: number, externalId: string, process: Process, url: string) {
+    constructor(id: number, externalId: string, process: Process, name: string) {
         this.id = id;
         this.externalId = externalId;
         this.process = process;
-        this.url = url;
+        this.name = name;
     }
 
     @BeforeInsert()

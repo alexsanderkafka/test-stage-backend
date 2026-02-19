@@ -9,11 +9,12 @@ import ProcessController from "./controller/ProcessController";
 import SubprocessController from "./controller/SubprocessController";
 import ToolController from "./controller/ToolController";
 import PeopleController from "./controller/PeopleController";
+import DocumentationController from "./controller/DocumentationController";
 
 const app: any = createExpressServer({
     cors: true,
     routePrefix: "/api",
-    controllers: [AuthController, AreaController, ProcessController, SubprocessController, ToolController, PeopleController],
+    controllers: [AuthController, AreaController, ProcessController, SubprocessController, ToolController, PeopleController, DocumentationController],
     classTransformer: true
 });
 

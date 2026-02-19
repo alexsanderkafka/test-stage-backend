@@ -2,14 +2,18 @@ import ProcessRequestDTO from "../dto/request/ProcessRequestDTO";
 import ProcessResponseDTO from "../dto/response/ProcessResponseDTO";
 import AreaEntity from "../entity/AreaEntity";
 import ProcessEntity from "../entity/ProcessEntity";
+import UserEntity from "../entity/UserEntity";
 import AppError from "../error/AppError";
+import ProcessMapper from "../mapper/ProcessMapper";
 import AreaRepository from "../repository/AreaRepository";
 import ProcessRepository from "../repository/ProcessRepository";
+import UserRepository from "../repository/UserRepository";
 
 export default class ProcessService{
 
     private areaRepository: AreaRepository = new AreaRepository();
     private processRepository: ProcessRepository = new ProcessRepository();
+    private userRepository: UserRepository = new UserRepository();
 
     async saveNewProcess(dto: ProcessRequestDTO, areaExternalId: string): Promise<void>{
         const area: AreaEntity = await this.areaRepository.findAreaByExternalId(areaExternalId);
@@ -28,14 +32,9 @@ export default class ProcessService{
             throw new AppError("Processo não encontrado", 404);
         }
         
-        await this.processRepository.update(currentProcess, body);
-        
-        const response: ProcessResponseDTO = {
-            externalId: currentProcess.externalId,
-            name: currentProcess.name,
-            type: currentProcess.type,
-            description: currentProcess.description
-        }
+        const updatedProcess: ProcessEntity = await this.processRepository.update(currentProcess, body);
+
+        const response: ProcessResponseDTO = ProcessMapper.toResponseDto(updatedProcess);
         
         return response;
     }
@@ -48,5 +47,17 @@ export default class ProcessService{
         }
 
         await this.processRepository.delete(currentProcess);
+    }
+
+    async getAll(userExternalId: string): Promise<ProcessResponseDTO[]> {
+        const user: UserEntity = await this.userRepository.findUserByExternalId(userExternalId);
+                        
+        if(!user){
+            throw new AppError("Usuário não encontrado", 404);
+        }
+                
+        const processes: ProcessEntity[] = await this.processRepository.findAll(userExternalId);
+        
+        return ProcessMapper.toResponseDtoList(processes);
     }
 }

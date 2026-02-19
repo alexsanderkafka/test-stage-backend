@@ -20,18 +20,44 @@ export default class ProcessRepository{
     
     async findProcessByExternalId(externalId: string): Promise<ProcessEntity>{
         const process = await this.ormRepository.findOne({
-            where: { externalId }
+            where: { externalId },
+            relations: {
+                area: true,
+                subprocess: true,
+                peoples: true,
+                tools: true,
+                documentations: true
+            }
         });
     
         return process;
     }
+
+    async findAll(userExternalId: string): Promise<ProcessEntity[]> {
+        return await this.ormRepository.find({
+            where: {
+                area: {
+                    user: {
+                        externalId: userExternalId
+                    }
+                }
+            },
+            relations: {
+                area: true,
+                subprocess: true,
+                peoples: true,
+                tools: true,
+                documentations: true
+            }
+        });
+    }
     
     async update(process: ProcessEntity, dto: ProcessRequestDTO): Promise<ProcessEntity>{
-    
+        
         this.ormRepository.merge(process, {
             name: dto.name,
             type: dto.type,
-            description: dto.description
+            description: dto.description,
         });
     
         return this.ormRepository.save(process);

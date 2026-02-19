@@ -1,10 +1,12 @@
-import { Body, Delete, Get, JsonController, Param, Post, Res } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Res, UseBefore } from "routing-controllers";
 import SubprocessService from "../service/SubprocessService";
 import SubprocessRequestDTO from "../dto/request/SubprocessRequestDTO";
 import SubprocessResponseDTO from "../dto/response/SubprocessResponseDTO";
+import SecurityFilter from "../middleware/SecurityFilterMiddleware";
 
 
 @JsonController("/subprocess")
+@UseBefore(SecurityFilter)
 export default class SubprocessController{
 
     private subprocessService: SubprocessService = new SubprocessService();

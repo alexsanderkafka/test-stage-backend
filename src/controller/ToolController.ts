@@ -1,9 +1,11 @@
-import { Body, Delete, Get, JsonController, Param, Post, Res } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Res, UseBefore } from "routing-controllers";
 import ToolRequestDTO from "../dto/request/ToolRequestDTO";
 import ToolService from "../service/ToolService";
 import ToolsResponseDTO from "../dto/response/ToolsResponseDTO";
+import SecurityFilter from "../middleware/SecurityFilterMiddleware";
 
 @JsonController("/tool")
+@UseBefore(SecurityFilter)
 export default class ToolController{
 
     private toolService: ToolService = new ToolService();

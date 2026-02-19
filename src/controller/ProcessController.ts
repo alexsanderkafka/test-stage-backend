@@ -1,9 +1,11 @@
-import { Body, Delete, JsonController, Param, Post, Put, Res } from "routing-controllers";
+import { Body, Delete, JsonController, Param, Post, Put, Res, UseBefore } from "routing-controllers";
 import ProcessRequestDTO from "../dto/request/ProcessRequestDTO";
 import ProcessService from "../service/ProcessService";
 import ProcessResponseDTO from "../dto/response/ProcessResponseDTO";
+import SecurityFilter from "../middleware/SecurityFilterMiddleware";
 
 @JsonController("/process")
+@UseBefore(SecurityFilter)
 export default class ProcessController {
 
     private processService: ProcessService = new ProcessService();

@@ -1,9 +1,11 @@
-import { Body, Delete, Get, JsonController, Param, Post, Res } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Res, UseBefore } from "routing-controllers";
 import PeopleService from "../service/PeopleService";
 import PeopleRequestDTO from "../dto/request/PeopleRequestDTO";
 import PeopleResponseDTO from "../dto/response/PeopleResponseDTO";
+import SecurityFilter from "../middleware/SecurityFilterMiddleware";
 
 @JsonController("/people")
+@UseBefore(SecurityFilter)
 export default class PeopleController{
 
     private peopleService: PeopleService = new PeopleService();

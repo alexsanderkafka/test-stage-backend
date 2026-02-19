@@ -1,10 +1,12 @@
-import { Body, Delete, Get, JsonController, Param, Post, Put, Res } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Put, Res, UseBefore } from "routing-controllers";
 import AreaService from "../service/AreaService";
 import AreaRequestDTO from "../dto/request/AreaRequestDTO";
 import AreaResponseDTO from "../dto/response/AreaResponseDTO";
+import SecurityFilter from "../middleware/SecurityFilterMiddleware";
 
 @JsonController("/area")
-export default class AreaController {
+@UseBefore(SecurityFilter)
+export default class AreaController {   
 
     private areaService: AreaService = new AreaService();
 

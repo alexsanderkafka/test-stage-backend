@@ -1,6 +1,7 @@
-import { Body, Delete, JsonController, Param, Post, Res } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Res } from "routing-controllers";
 import PeopleService from "../service/PeopleService";
 import PeopleRequestDTO from "../dto/request/PeopleRequestDTO";
+import PeopleResponseDTO from "../dto/response/PeopleResponseDTO";
 
 @JsonController("/people")
 export default class PeopleController{
@@ -22,6 +23,13 @@ export default class PeopleController{
         await this.peopleService.deletePeople(externalId)
     
         return res.status(204).send();
+    }
+
+    @Get("/:userExternalId")
+    async getAll(@Param("userExternalId") userExternalId: string, @Res() res: any){
+        const result: PeopleResponseDTO[] = await this.peopleService.getAll(userExternalId);
+        
+        return res.status(200).json(result);
     }
 
 

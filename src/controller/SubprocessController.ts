@@ -1,6 +1,7 @@
-import { Body, Delete, JsonController, Param, Post, Res } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Res } from "routing-controllers";
 import SubprocessService from "../service/SubprocessService";
 import SubprocessRequestDTO from "../dto/request/SubprocessRequestDTO";
+import SubprocessResponseDTO from "../dto/response/SubprocessResponseDTO";
 
 
 @JsonController("/subprocess")
@@ -23,6 +24,14 @@ export default class SubprocessController{
         await this.subprocessService.deleteSubprocess(externalId)
 
         return res.status(204).send();
+    }
+
+
+    @Get("/:userExternalId")
+    async getAll(@Param("userExternalId") userExternalId: string, @Res() res: any){
+        const result: SubprocessResponseDTO[] = await this.subprocessService.getAll(userExternalId);
+                
+        return res.status(200).json(result);
     }
 
 }

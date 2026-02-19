@@ -15,6 +15,20 @@ export default class ToolRepository{
         
         return await this.ormRepository.save(newTool);
     }
+
+    async findAll(userExternalId: string): Promise<ToolsEntity[]> {
+        return await this.ormRepository.find({
+            where: {
+                process: {
+                    area: {
+                        user: {
+                            externalId: userExternalId
+                        }
+                    }
+                }
+            }
+        });
+    }
     
     async findToolByExternalId(externalId: string): Promise<ToolsEntity>{
         const tool = await this.ormRepository.findOne({

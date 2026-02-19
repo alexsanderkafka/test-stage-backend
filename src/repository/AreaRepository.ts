@@ -17,6 +17,25 @@ export default class AreaRepository{
         return await this.ormRepository.save(newArea);
     }
 
+    async findAll(userExternalId: string): Promise<AreaEntity[]> {
+        return await this.ormRepository.find({
+            where: {
+                user: {
+                    externalId: userExternalId
+                }
+            },
+            relations: {
+                processes: {
+                    subprocess: true,
+                    peoples: true,
+                    tools: true,
+                    documentations: true
+                },
+                user: true,
+            }
+        });
+    }
+
     async findAreaByExternalId(externalId: string): Promise<AreaEntity>{
         const area = await this.ormRepository.findOne({
             where: { externalId }

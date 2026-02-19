@@ -1,6 +1,7 @@
-import { Body, Delete, JsonController, Param, Post, Res } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Res } from "routing-controllers";
 import ToolRequestDTO from "../dto/request/ToolRequestDTO";
 import ToolService from "../service/ToolService";
+import ToolsResponseDTO from "../dto/response/ToolsResponseDTO";
 
 @JsonController("/tool")
 export default class ToolController{
@@ -22,6 +23,13 @@ export default class ToolController{
         await this.toolService.deleteTool(externalId)
 
         return res.status(204).send();
+    }
+
+    @Get("/:userExternalId")
+    async getAll(@Param("userExternalId") userExternalId: string, @Res() res: any){
+        const result: ToolsResponseDTO[] = await this.toolService.getAll(userExternalId);
+                    
+        return res.status(200).json(result);
     }
 
 }

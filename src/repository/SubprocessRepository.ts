@@ -16,6 +16,20 @@ export default class SubprocessRepository{
         return await this.ormRepository.save(newSubprocess);
     }
 
+    async findAll(userExternalId: string): Promise<SubprocessEntity[]> {
+        return await this.ormRepository.find({
+            where: {
+                process: {
+                    area: {
+                        user: {
+                            externalId: userExternalId
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     async findSubprocessByExternalId(externalId: string): Promise<SubprocessEntity>{
         const subprocess = await this.ormRepository.findOne({
             where: { externalId }

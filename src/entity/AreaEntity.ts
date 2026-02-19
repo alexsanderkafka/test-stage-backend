@@ -35,7 +35,7 @@ export default class AreaEntity {
     user: User;
 
     @OneToMany(() => ProcessEntity, process => process.area)
-    process!: ProcessEntity[];
+    processes!: ProcessEntity[];
 
     constructor(id: number, externalId: string, name: string, description: string, user: User) {
         this.id = id;

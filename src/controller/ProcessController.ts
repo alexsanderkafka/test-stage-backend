@@ -1,7 +1,4 @@
 import { Body, Delete, JsonController, Param, Post, Put, Res } from "routing-controllers";
-import AreaService from "../service/AreaService";
-import AreaRequestDTO from "../dto/request/AreaRequestDTO";
-import AreaResponseDTO from "../dto/response/AreaResponseDTO";
 import ProcessRequestDTO from "../dto/request/ProcessRequestDTO";
 import ProcessService from "../service/ProcessService";
 import ProcessResponseDTO from "../dto/response/ProcessResponseDTO";
@@ -36,6 +33,4 @@ export default class ProcessController {
 
         return res.status(204).send();
     }
-    
-    
 }

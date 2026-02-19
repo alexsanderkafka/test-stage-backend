@@ -16,6 +16,20 @@ export default class PeopleRepository{
         return await this.ormRepository.save(newPeople);
     }
 
+    async findAll(userExternalId: string): Promise<PeopleEntity[]> {
+        return await this.ormRepository.find({
+            where: {
+                process: {
+                    area: {
+                        user: {
+                            externalId: userExternalId
+                        }
+                    }
+                }
+            }
+        });
+    }
+
     async findPeopleByExternalId(externalId: string): Promise<PeopleEntity> {
         const people = await this.ormRepository.findOne({
             where: { externalId }

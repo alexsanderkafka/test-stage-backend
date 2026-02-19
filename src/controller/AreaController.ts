@@ -1,4 +1,4 @@
-import { Body, Delete, JsonController, Param, Post, Put, Res } from "routing-controllers";
+import { Body, Delete, Get, JsonController, Param, Post, Put, Res } from "routing-controllers";
 import AreaService from "../service/AreaService";
 import AreaRequestDTO from "../dto/request/AreaRequestDTO";
 import AreaResponseDTO from "../dto/response/AreaResponseDTO";
@@ -32,6 +32,15 @@ export default class AreaController {
         await this.areaService.deleteArea(externalId);
 
         return res.status(204).send();
+    }
+
+    @Get("/:userExternalId")
+    async getAll(@Param("userExternalId") userExternalId: string, @Res() res: any): Promise<any>{
+        
+        const result: AreaResponseDTO[] = await this.areaService.getAll(userExternalId);
+
+        return res.status(200).json(result);
+        
     }
     
     

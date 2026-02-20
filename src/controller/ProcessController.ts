@@ -42,4 +42,11 @@ export default class ProcessController {
                         
         return res.status(200).json(result);
     }
+
+    @Get("/one/:externalId")
+    async getOne(@Param("externalId") externalId: string, @Res() res: any){
+        const result: ProcessResponseDTO = await this.processService.getOne(externalId);
+                        
+        return res.status(200).json(result);
+    }
 }

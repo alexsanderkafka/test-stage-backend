@@ -7,13 +7,13 @@ export default abstract class TokenJWT {
     static generateToken(email: string): string {
         const secret = process.env.JWT_SECRET_KEY as string;
         
-        return jwt.sign({ email }, secret, { expiresIn: 3000 });
+        return jwt.sign({ email }, secret, { expiresIn: 30000 });
     }
 
     static generateRefreshToken(email: string): string{
         const secret = process.env.JWT_SECRET_KEY as string;
         
-        return jwt.sign({ email }, secret, { expiresIn: 6000 });
+        return jwt.sign({ email }, secret, { expiresIn: 60000 });
     }
 
     static verifyToken(token: string): void{

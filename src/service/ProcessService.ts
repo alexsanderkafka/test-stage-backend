@@ -60,4 +60,16 @@ export default class ProcessService{
         
         return ProcessMapper.toResponseDtoList(processes);
     }
+
+    async getOne(externalId: string): Promise<ProcessResponseDTO> {
+        
+        const currentProcess: ProcessEntity = await this.processRepository.findProcessByExternalId(externalId);
+        
+        if(!currentProcess){
+            throw new AppError("Processo não encontrado", 404);
+        }
+
+        return ProcessMapper.toResponseDto(currentProcess);
+        
+    }
 }
